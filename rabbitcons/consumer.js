@@ -1,10 +1,10 @@
 const dotenv = require('dotenv').config();
 const amqp = require('amqplib');
 
-let quantia = 1000; // Quantia inicial no consumidor
+let quantia = 1000; 
 
 async function receiveMessage() {
-    let queue = 'transactions'; // Fila correta
+    let queue = 'transactions'; 
     let url = process.env.AMQP;
     if (!url) {
         console.error("Erro: Variável de ambiente AMQP não configurada.");

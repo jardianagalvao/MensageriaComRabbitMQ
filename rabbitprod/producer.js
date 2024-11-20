@@ -2,8 +2,8 @@ const amqp = require('amqplib');
 const dotenv = require('dotenv').config();
 
 async function sendMessage() {
-    let queue = 'transactions'; // Fila correta
-    let amountToDeduct = 850; // Quantia a ser deduzida
+    let queue = 'transactions'; 
+    let amountToDeduct = 50; 
     let url = process.env.AMQP;
     if (!url) {
         console.error("Erro: Variável de ambiente AMQP não configurada.");
@@ -19,13 +19,11 @@ async function sendMessage() {
         const message = JSON.stringify({ amount: amountToDeduct });
         channel.sendToQueue(queue, Buffer.from(message));
         console.log(`Mensagem enviada: ${message}`);
-
-        await channel.close();
-        await connection.close();
-        /*setTimeout(() => {
+        
+        setTimeout(() => {
             connection.close();
             process.exit(0);
-        }, 500);*/
+        }, 500);
     } catch (error) {
         console.error(error);
     }
